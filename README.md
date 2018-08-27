@@ -1,2 +1,2 @@
 # rb
-![alt text](https://drive.google.com/file/d/1cN1PInxQcv1fgmoBt8IPTajeXIfVXJOm/preview)
+![Architecture](https://github.com/kurartur/rb/blob/master/arch.png?raw=true)
