@@ -1,12 +1,12 @@
 ![Architecture](https://github.com/kurartur/rb/blob/master/arch.png?raw=true)
 
-**rb-importer** - Spring Boot application with a REST controller which receives messages from providers (hotels). Received messages are put into *rb-importer-queue*.
+**rb-importer** - Spring Boot application with a REST controller which receives messages from providers (hotels). Received messages are put into *rb-importer-queue*. Multiple instances can run at the same time.
 
-**rb-sync** - Spring Boot application with a listener that listens to *rb-importer-queue* for messages. Assume that providers message include provider ID and message's sequence number which is unique for that provider. By using sequence number rb-sync will put messages into *rb-consumer-queue* in correct order.
+**rb-sync** - Spring Boot application with a listener that listens to *rb-importer-queue* for messages. Assume that providers message include provider ID and message's sequence number which is unique for that provider. By using sequence number rb-sync will put messages into *rb-consumer-queue* in correct order. Only one instance can run at a time.
 
 ![Flow](https://github.com/kurartur/rb/blob/master/flow.png?raw=true)
 
-**rb-consumer** - Spring Boot application that listens to *rb-consumer-queue* and processes received messages.
+**rb-consumer** - Spring Boot application that listens to *rb-consumer-queue* and processes received messages. Only one instance can run at a time.
 
 **JMS broker** - JMS provider with *rb-impoter-queue* and *rb-consumer-queue*. [RabbitMQ](https://www.rabbitmq.com/) is used in this example.
 
@@ -23,6 +23,7 @@ $ docker-compose build
 $ docker-compose up
 ```
 It will launch RabbitMQ (172.20.199.2), rb-importer (172.20.199.3), rb-sync (172.20.199.4) and rb-consumer (172.20.199.5) and output to the console.
+In real life components would run on different hosts/containers.
 
 # Testing
 Message REST endpoint should be accessible on http://172.20.199.3:8080/message  
