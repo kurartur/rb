@@ -2,15 +2,15 @@
 
 **rb-importer** - Spring Boot application with a REST controller which receives messages from providers (hotels). Received messages are put into *rb-importer-queue*.
 
-**rb-sync** - Spring Boot application that listens to rb-importer-queue for messages. Assume that providers message include provider ID and message's sequence number which is unique for that provider. By using sequence number rb-sync will put messages into *rb-consumer-queue* in correct order.
+**rb-sync** - Spring Boot application with a listener that listens to *rb-importer-queue* for messages. Assume that providers message include provider ID and message's sequence number which is unique for that provider. By using sequence number rb-sync will put messages into *rb-consumer-queue* in correct order.
 
 ![Flow](https://github.com/kurartur/rb/blob/master/flow.png?raw=true)
 
-**rb-consumer** - Spring Boot application that listens to rb-consumer-queue and processes messages received messages.
+**rb-consumer** - Spring Boot application that listens to *rb-consumer-queue* and processes received messages.
 
-**JMS broker** - JMS provider with rb-impoter-queue and rb-consumer-queue. [RabbitMQ](https://www.rabbitmq.com/) is used in this example.
+**JMS broker** - JMS provider with *rb-impoter-queue* and *rb-consumer-queue*. [RabbitMQ](https://www.rabbitmq.com/) is used in this example.
 
-**Message Store** - Database where rb-sync can store messages. In this example messages are simply stored in application's memory ([InMemoryMessageRepository]())
+**Message Store** - Database where rb-sync can store messages. In this example messages are simply stored in application's memory ([InMemoryMessageRepository](https://github.com/kurartur/rb/blob/master/rb-sync/src/main/java/com/rb/sync/InMemoryMessageRepository.java))
 
 # Running
 To run the project using commands below *docker* and *docker-compose* must be installed on the system.
@@ -22,6 +22,19 @@ $ ./rb-consumer/gradlew build -p rb-consumer
 $ docker-compose build
 $ docker-compose up
 ```
+It will launch RabbitMQ (172.20.199.2), rb-importer(172.20.199.3), rb-sync(172.20.199.4) and rb-consumer(172.20.199.5)
+
+# Testing
+Message REST endpoint should be accessible on http://172.20.199.3:8080/message
+It accepts POST requests with following JSON structure in request body:
+```json
+{
+   "providerId": "MegaHotel",
+   "sequenceNumber": 1,
+   "payload": "my payload"
+}
+```
+rb-importer and rb-consumer will log received messages to the console.
 
 # Q&A
 ##### What are the advantages of this setup?
