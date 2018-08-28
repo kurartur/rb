@@ -30,11 +30,12 @@ It accepts POST requests with following JSON structure in request body:
 ```json
 {
    "providerId": "MegaHotel",
-   "sequenceNumber": 1, // 2, 3, 4, 5, 6, ....
+   "sequenceNumber": 1,
    "payload": "my payload"
 }
 ```
 rb-importer and rb-consumer will log received messages to the console.
+Sequence numbers and provider IDs can be varied to check how systems reacts.
 
 # Q&A
 ##### What are the advantages of this setup?
@@ -47,7 +48,7 @@ rb-importer and rb-consumer will log received messages to the console.
 - 3 additional components in system - JMS Broker, Message Store and rb-sync app that need to be maintained (*but since large projects most probably already have JMS Broker and some kind of database, that leaves us only with additional rb-sync app, so this disadvantage is questionable*)
 
 ##### What kind of data does the message by the sender NEED to contain to ensure ordered processing?
-- Sender must include his ID and sequence number of the message he sends.
+- Sender must include his ID and sequence number of the message he sends. Sequences should start from 1.
 
 ##### What hasn't been done and needs to be done?
 - Transaction management.
