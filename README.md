@@ -53,4 +53,5 @@ Sequence numbers and provider IDs can be varied to check how systems reacts.
 ##### What hasn't been done and needs to be done?
 - Transaction management.
 - "In memory" message store needs to be replaced with normal high-performance database (Hazelcast, MongoDB ot similar), because now messages are lost on rb-sync restart.
+- ??? It's never perfect :)
 
