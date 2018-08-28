@@ -38,19 +38,19 @@ rb-importer and rb-consumer will log received messages to the console.
 Sequence numbers and provider IDs can be varied to check how systems reacts.
 
 # Q&A
-##### What are the advantages of this setup?
+#### What are the advantages of this setup?
 - System is decoupled. Changes can be made to any part of the system without worrying about other parts.
 - System is durable. Messages can only be lost in case of JMS Broker or Message Store fatal failure.
 - UI/monitoring can be easily attached to message store to track/troubleshoot stuck messages.
 
-##### What are the disadvantages of this setup?
+#### What are the disadvantages of this setup?
 - External message provider (hotel) must implement some sort of sequence generator on his side.
 - 3 additional components in system - JMS Broker, Message Store and rb-sync app that need to be maintained (*but since large projects most probably already have JMS Broker and some kind of database, that leaves us only with additional rb-sync app, so this disadvantage is questionable*)
 
-##### What kind of data does the message by the sender NEED to contain to ensure ordered processing?
+#### What kind of data does the message by the sender NEED to contain to ensure ordered processing?
 - Sender must include his ID and sequence number of the message he sends. Sequences should start from 1.
 
-##### What hasn't been done and needs to be done?
+#### What hasn't been done and needs to be done?
 - Transaction management.
 - "In memory" message store needs to be replaced with normal high-performance database (Hazelcast, MongoDB ot similar), because now messages are lost on rb-sync restart.
 - Archive old messages.
