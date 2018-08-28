@@ -30,7 +30,7 @@ It accepts POST requests with following JSON structure in request body:
 ```json
 {
    "providerId": "MegaHotel",
-   "sequenceNumber": 1,
+   "sequenceNumber": 1, // 2, 3, 4, 5, 6, ....
    "payload": "my payload"
 }
 ```
