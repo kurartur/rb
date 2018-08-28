@@ -40,7 +40,7 @@ Sequence numbers and provider IDs can be varied to check how systems reacts.
 # Q&A
 #### What are the advantages of this setup?
 - System is decoupled. Changes can be made to any part of the system without worrying about other parts.
-- System is durable. Messages can only be lost in case of JMS Broker or Message Store fatal failure.
+- System is durable and reliable. Messages can only be lost in case of JMS Broker or Message Store fatal failure.
 - UI/monitoring can be easily attached to message store to track/troubleshoot stuck messages.
 
 #### What are the disadvantages of this setup?
