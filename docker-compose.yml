@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.7-management
+    volumes:
+     - ./data:/var/lib/rabbitmq:rw
+     - ./rabbitmq-definitions.json:/opt/definitions.json:ro
+     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+    networks:
+      app_net:
+        ipv4_address: 172.20.199.2
+  importer:
+    build: ./rb-importer
+    networks:
+      app_net:
+        ipv4_address: 172.20.199.3
+  sync:
+    build: ./rb-sync
+    networks:
+      app_net:
+        ipv4_address: 172.20.199.4
+  consumer:
+    build: ./rb-consumer
+    networks:
+      app_net:
+        ipv4_address: 172.20.199.5
+networks:
+  app_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.20.199.1/24
+        gateway: 172.20.199.1

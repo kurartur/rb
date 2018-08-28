@@ -1,0 +1,17 @@
+server:
+    port: 8081
+
+logging:
+    level:
+        #org.springframework.web: DEBUG
+        com.rb.consumer: DEBUG
+
+spring:
+    rabbitmq:
+        host: 172.20.199.2
+        port: 5672
+        username: guest
+        password: guest
+
+rb:
+    consumer_queue_name: rb-consumer-queue

@@ -1,0 +1,17 @@
+server:
+    port: 8080
+
+logging:
+    level:
+        #org.springframework.web: DEBUG
+        com.rb.importer: DEBUG
+
+spring:
+    rabbitmq:
+        host: 172.20.199.2
+        port: 5672
+        username: guest
+        password: guest
+
+rb:
+    importer_queue_name: rb-importer-queue

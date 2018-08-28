@@ -1,0 +1,24 @@
+package com.rb.importer;
+
+import com.rb.core.message.JmsMessageSender;
+import com.rb.core.message.RabbitMessageSender;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class Application {
+
+    @Bean
+    protected JmsMessageSender importerQueueSender(RabbitTemplate rabbitTemplate, @Value("${rb.importer_queue_name}") String queueName) {
+        return new RabbitMessageSender(rabbitTemplate, new Queue(queueName));
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}

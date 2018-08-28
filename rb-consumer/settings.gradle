@@ -1,0 +1,3 @@
+rootProject.name = 'rb-consumer'
+
+includeBuild '../rb-core'

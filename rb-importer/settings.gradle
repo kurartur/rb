@@ -1,0 +1,3 @@
+rootProject.name = 'rb-importer'
+
+includeBuild '../rb-core'
