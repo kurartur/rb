@@ -22,10 +22,10 @@ $ ./rb-consumer/gradlew build -p rb-consumer
 $ docker-compose build
 $ docker-compose up
 ```
-It will launch RabbitMQ (172.20.199.2), rb-importer(172.20.199.3), rb-sync(172.20.199.4) and rb-consumer(172.20.199.5)
+It will launch RabbitMQ (172.20.199.2), rb-importer (172.20.199.3), rb-sync (172.20.199.4) and rb-consumer (172.20.199.5) and output to the console.
 
 # Testing
-Message REST endpoint should be accessible on http://172.20.199.3:8080/message
+Message REST endpoint should be accessible on http://172.20.199.3:8080/message  
 It accepts POST requests with following JSON structure in request body:
 ```json
 {
@@ -34,7 +34,7 @@ It accepts POST requests with following JSON structure in request body:
    "payload": "my payload"
 }
 ```
-rb-importer and rb-consumer will log received messages to the console.
+rb-importer and rb-consumer will log received messages to the console.  
 Sequence numbers and provider IDs can be varied to check how systems reacts.
 
 # Q&A
